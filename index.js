@@ -1,9 +1,8 @@
 const inquirer = require('inquirer');
-//const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
-const generateHtmlPage = require('./src/page-template');
+const {generateHtmlPage, writeFile} = require('./src/page-template');
 
 let employees = [];
 
@@ -174,11 +173,12 @@ getManager()
         const {name, id, email, office} = managerInfo;
         employees.push(new Manager(name, id, email, office));
         
+        // if add employee is chosen
         if (managerInfo.addemployee === 'Yes') {
             return getEmployee()
                 
-                // get inquirer answers for other employees
-                .then(employeeInfo => {
+            // get inquirer answers for other employees
+            .then(employeeInfo => {
 
                 // destructure employeeInfo
                 const {role,name,id,email,school,github} = employeeInfo;
@@ -194,17 +194,64 @@ getManager()
                 if (employeeInfo.addemployee === 'Yes') {
                     return getEmployee();
                 } else {
-                    // generate HTML page
-                    //console.log(employees);
-                    generateHtmlPage(employees);
+                    // generate HTML page (using mock data)
+                    console.log(employees);
+                    return generateHtmlPage(employees) 
                 }
-            });
+
+            }).then(htmlPage => {
+                    //console.log("HTML page:",htmlpage);
+                    console.log(typeof htmlPage);
+                    return writeFile(htmlPage);
+                })
+                // try to catch error
+                .catch(err => {
+                    console.log(err);
+                })
 
         } else {
             console.log(employees);
         }
     })
 
+// let mockData =  [
+//     Manager {
+//     name: 'Jason',
+//     id: '543',
+//     email: 'jason@gmail.com',
+//     officeNumber: '4'
+//   },
+//   Engineer {
+//     name: 'Engina',
+//     id: '321',
+//     email: 'engineer@hotmail.com',
+//     github: 'dkdkaeidk'
+//   },
+//   Engineer {
+//     name: 'Bob',
+//     id: '875',
+//     email: 'bob@hotmail.com',
+//     github: 'bobilicious'
+//   },
+//   Intern {
+//     name: 'Teieny',
+//     id: '643',
+//     email: 'intern@aol.com',
+//     school: 'Humboldt',
+//   }
+// ];
 
-
-
+// let mock = [
+//     Manager {
+//       name: 'jason',
+//       id: '593',
+//       email: 'jason@gmail.com',
+//       officeNumber: '4'
+//     },
+//     Engineer {
+//       name: 'Engi',
+//       id: '432',
+//       email: 'engi@aol.com',
+//       github: 'jidadk'
+//     }
+//   ]
