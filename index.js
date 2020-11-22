@@ -190,27 +190,29 @@ getManager()
                     employees.push(new Intern(name,id,email,school));
                 }
 
-                // if an additional employee is chosen loop
+                // if additional employee is chosen run getEmployee again
                 if (employeeInfo.addemployee === 'Yes') {
                     return getEmployee();
-                } else {
-                    // generate HTML page (using mock data)
+                } 
+                else {
+                    // generate HTML page with employees array
                     console.log(employees);
+                    console.log("Employees is an: ", typeof employees);
                     return generateHtmlPage(employees) 
                 }
 
             }).then(htmlPage => {
                     //console.log("HTML page:",htmlpage);
                     console.log(typeof htmlPage);
-                    return writeFile(htmlPage);
-                })
+                    writeFile(htmlPage);
+            })
                 // try to catch error
                 .catch(err => {
                     console.log(err);
                 })
 
         } else {
-            console.log(employees);
+            console.log("No Employees created:", employees);
         }
     })
 
