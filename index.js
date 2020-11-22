@@ -151,7 +151,19 @@ const getEmployee = () => {
                 message: 'Would you like to add another Employee?',
                 choices: ['Yes', 'No'],
             },
+        ])
+};
 
+const addEmployee = () => {
+    
+    return inquirer
+        .prompt([
+            {
+                type: 'list',
+                name: 'addemployee',
+                message: 'Would you like to add another Employee?',
+                choices: ['Yes', 'No'],
+            },
         ])
 };
 
@@ -163,31 +175,36 @@ getManager()
         employees.push(new Manager(name, id, email, office));
         
         if (managerInfo.addemployee === 'Yes') {
-            return getEmployee();
+            return getEmployee()
+                
+                // get inquirer answers for other employees
+                .then(employeeInfo => {
+
+                // destructure employeeInfo
+                const {role,name,id,email,school,github} = employeeInfo;
+
+                // create new instance based on role
+                if (role === 'Engineer') {
+                    employees.push(new Engineer(name,id,email,github));
+                } else {
+                    employees.push(new Intern(name,id,email,school));
+                }
+
+                // if an additional employee is chosen loop
+                if (employeeInfo.addemployee === 'Yes') {
+                    return getEmployee();
+                } else {
+                    // generate HTML page
+                    //console.log(employees);
+                    generateHtmlPage(employees);
+                }
+            });
+
+        } else {
+            console.log(employees);
         }
     })
-    // get inquirer answers for other employees
-    .then(employeeInfo => {
-        //console.log(employeeInfo);
-        // destructure employeeInfo
-        const {role,name,id,email,school,github} = employeeInfo;
 
-        // create new instance based on role
-        if (role === 'Engineer') {
-            employees.push(new Engineer(name,id,email,github));
-        } else {
-            employees.push(new Intern(name,id,email,school));
-        }
-
-        // if add additional employee is chosen
-        if (employeeInfo.addemployee === 'Yes') {
-            return getEmployee();
-        } else {
-            generateHtmlPage(employees);
-        }
-
-        //console.log(employees);
-    });
 
 
 

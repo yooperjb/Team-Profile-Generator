@@ -54,7 +54,7 @@ const generateHtmlPage2 = (employees) => {
 };
 
 const generateHtmlPage = (employees) => {
-    console.log(`Got the data`, employees);
+    console.log(employees);
     employees.forEach(element => {
         console.log(element);
     });
