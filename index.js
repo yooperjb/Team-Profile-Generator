@@ -227,15 +227,15 @@ const createEmployee = () => {
         getInternInfo()
     } else {
         
-        // build html from here
-        console.log(employees);
+        // build html from employees array here
+        //console.log(employees);
         const htmlPage = generateHtmlPage(employees);
-
+        // write generated html code to file
         writeFile(htmlPage);
     }
     })
 };
 
-// Initialize getManager Info
+// Initialize with getManager Info
 getManagerInfo();
 

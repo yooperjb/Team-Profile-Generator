@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const generateHtmlPage = (employees) => {
-    //console.log(`Got the data`, employees);
+
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +30,7 @@ const generateHtmlPage = (employees) => {
 };
 
 const generateCard = (employees) => {
-    //console.log("Generate card");
+
     return `   
         ${employees
             .filter((employee) => employee.getRole() === "Manager")
@@ -98,8 +98,6 @@ const generateCard = (employees) => {
 };
 
 const writeFile = fileContent => {
-    //console.log("FileType is: ", typeof fileContent);
-    //console.log("File is: ", fileContent);
     
     return new Promise ((resolve, reject) => {
         fs.writeFile('./dist/index.html', fileContent, err => {
@@ -108,7 +106,6 @@ const writeFile = fileContent => {
                 reject(err);
                 return;
             }
-
             // if all is well, resolve
             resolve({
                 ok: true,
