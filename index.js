@@ -45,6 +45,13 @@ const getManagerInfo = () => {
             type: 'text',
             name: 'email',
             message: 'What is the Managers email?',
+            validate: emailInput => {
+                if (emailInput.includes('@')) {
+                    return true;
+                } else {
+                    return('Please enter a valid email!');
+                }
+            }
         },
         {
             type: 'input',
@@ -104,6 +111,13 @@ const getEngineerInfo = () => {
                 type: 'text',
                 name: 'email',
                 message: 'What is the Engineers email?',
+                validate: emailInput => {
+                    if (emailInput.includes('@')) {
+                        return true;
+                    } else {
+                        return('Please enter a valid email!');
+                    }
+                }
             },
 
             {           
@@ -165,6 +179,13 @@ const getInternInfo = () => {
                 type: 'text',
                 name: 'email',
                 message: 'What is the Interns email?',
+                validate: emailInput => {
+                    if (emailInput.includes('@')) {
+                        return true;
+                    } else {
+                        return('Please enter a valid email!');
+                    }
+                }
             },
 
             {           
@@ -216,5 +237,5 @@ const createEmployee = () => {
 };
 
 // Initialize getManager Info
-getManagerInfo()
+getManagerInfo();
 

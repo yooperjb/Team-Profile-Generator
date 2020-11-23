@@ -1,4 +1,3 @@
-const { test, expect } = require('@jest/globals');
 const Intern = require('../lib/Intern');
 
 test('creates a new Intern object', () => {
